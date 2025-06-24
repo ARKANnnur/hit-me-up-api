@@ -2,8 +2,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## How to use
 
-First, run the development server:
-
 ```bash
 https://hit-me-up-api.vercel.app/api/gemini?message=hi
 
