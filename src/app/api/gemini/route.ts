@@ -12,12 +12,25 @@ export async function GET(request: Request) {
       contents: `${userInput}`,
     });
 
-    return NextResponse.json(response.candidates);
+    const res = NextResponse.json(response.candidates);
+    res.headers.set(
+      'Access-Control-Allow-Origin',
+      'https://hit-me-up-blue.vercel.app'
+    );
+    res.headers.set('Access-Control-Allow-Methods', 'GET');
+    res.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    return res;
   } catch (error) {
     console.error('Error initializing GoogleGenAI:', error);
-    return NextResponse.json(
+    const errorRes = NextResponse.json(
       { error: 'Token limit exceeded' },
       { status: 429 }
     );
+
+    errorRes.headers.set('Access-Control-Allow-Origin', 'https://hit-me-up-blue.vercel.app');
+    errorRes.headers.set('Access-Control-Allow-Methods', 'GET');
+    errorRes.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+    return errorRes;
   }
 }
